@@ -1,0 +1,18 @@
+---
+# tasks file for telegraf
+- name: Install influx repo
+  copy:
+    src: influx.repo
+    dest: /etc/yum.repos.d
+    mode: 0644
+    owner: root
+    group: root
+  notify: telegrafRestart
+
+- name: Install telegraf package
+  yum:
+    state: installed
+    pkg:
+      - telegraf
+  notify: telegrafRestart
+
